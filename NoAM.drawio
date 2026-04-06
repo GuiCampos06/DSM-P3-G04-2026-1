@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="5e-Kyj4yJHE16H-5MyHv">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="usuario" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Usuario&lt;br&gt;-------------------------------------------------&lt;br&gt;&lt;br&gt;_id (ObjectId)&lt;br&gt;nome (String)&lt;br&gt;nick (String)&lt;br&gt;email (String)&lt;br&gt;senha (String)&lt;br&gt;idade (Int)&lt;br&gt;cidade (String)&lt;br&gt;gostos (String)&lt;br&gt;personalidade (String)&lt;br&gt;valor (Decimal)&lt;br&gt;disponibilidade (Boolean)&lt;br&gt;preferencia_dia (String)&lt;br&gt;preferencia_horario (String)&lt;br&gt;codigo (String)&lt;br&gt;criado_em (Date)&lt;br&gt;atualizado_em (Date)" vertex="1">
+          <mxGeometry height="320" width="200" x="-680" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="evento" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Evento&lt;br&gt;-------------------------------------------------&lt;br&gt;&lt;br&gt;_id (ObjectId)&lt;br&gt;nomeEvento (String)&lt;br&gt;dataEvento (Date)&lt;br&gt;localEvento (String)&lt;br&gt;quantParticipantes (Int)&lt;br&gt;criadorId (ObjectId)" vertex="1">
+          <mxGeometry height="180" width="200" x="-370" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="gasto" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Gasto&lt;br&gt;-------------------------------------------------&lt;br&gt;&lt;br&gt;_id (ObjectId)&lt;br&gt;usuarioId (ObjectId)&lt;br&gt;eventoId (ObjectId)&lt;br&gt;valor (Decimal)&lt;br&gt;categoria (String)&lt;br&gt;descricao (String)&lt;br&gt;dataGasto (Date)" vertex="1">
+          <mxGeometry height="180" width="200" x="-370" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="alerta" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Alerta&lt;br&gt;-------------------------------------------------&lt;br&gt;&lt;br&gt;_id (ObjectId)&lt;br&gt;usuarioId (ObjectId)&lt;br&gt;nivel (String)&lt;br&gt;mensagem (String)&lt;br&gt;criado_em (Date)" vertex="1">
+          <mxGeometry height="160" width="200" x="-680" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="participacao" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Participacao&lt;br&gt;-------------------------------------------------&lt;br&gt;&lt;br&gt;usuarioId (ObjectId)&lt;br&gt;eventoId (ObjectId)&lt;br&gt;status (String)" vertex="1">
+          <mxGeometry height="120" width="200" x="-680" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="mx86NiEQO1In4nut6fx0-3" edge="1" parent="1" source="usuario" style="edgeStyle=orthogonalEdgeStyle;html=1;" target="alerta" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t04whq4szwC_yjmFGngt-5" connectable="0" parent="mx86NiEQO1In4nut6fx0-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.6048" y="-6" as="geometry">
+            <mxPoint x="-6" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t04whq4szwC_yjmFGngt-6" connectable="0" parent="mx86NiEQO1In4nut6fx0-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="0.3952" y="4" as="geometry">
+            <mxPoint x="4" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel1" edge="1" parent="1" source="usuario" style="endArrow=block;html=1;" target="evento" value="1">
+          <mxGeometry relative="1" x="-0.7987" y="-3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t04whq4szwC_yjmFGngt-12" connectable="0" parent="rel1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0:N" vertex="1">
+          <mxGeometry relative="1" x="0.4756" as="geometry">
+            <mxPoint x="14" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel2" edge="1" parent="1" source="evento" style="endArrow=open;html=1;" target="participacao" value="&lt;span style=&quot;color: rgb(255, 255, 255); font-family: Helvetica; font-size: 11px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(18, 18, 18); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;1:N&lt;/span&gt;">
+          <mxGeometry relative="1" x="0.6364" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t04whq4szwC_yjmFGngt-9" connectable="0" parent="rel2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.1861" y="-1" as="geometry">
+            <mxPoint x="35" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel3" edge="1" parent="1" source="usuario" style="endArrow=none;html=1;" target="participacao" value="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t04whq4szwC_yjmFGngt-7" connectable="0" parent="rel3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0:N" vertex="1">
+          <mxGeometry relative="1" x="0.725" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel4" edge="1" parent="1" source="usuario" style="endArrow=none;html=1;" target="gasto" value="1">
+          <mxGeometry relative="1" x="-0.8182" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t04whq4szwC_yjmFGngt-11" connectable="0" parent="rel4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0:N" vertex="1">
+          <mxGeometry relative="1" x="0.1602" y="1" as="geometry">
+            <mxPoint x="26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel5" edge="1" parent="1" source="evento" style="endArrow=none;html=1;dashed=1;" target="gasto" value="1">
+          <mxGeometry relative="1" x="-0.6667" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t04whq4szwC_yjmFGngt-13" connectable="0" parent="rel5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0:N" vertex="1">
+          <mxGeometry relative="1" x="0.7345" y="2" as="geometry">
+            <mxPoint x="2" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
