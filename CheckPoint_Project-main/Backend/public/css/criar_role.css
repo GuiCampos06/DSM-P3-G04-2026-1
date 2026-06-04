@@ -276,3 +276,24 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
         width: 100%; /* Botão largura total no mobile */
     }
 }
+
+.lista-amigos-check {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    max-height: 120px;
+    overflow-y: auto;
+    padding: 10px;
+}
+.amigo-check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+.amigo-check-item input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}

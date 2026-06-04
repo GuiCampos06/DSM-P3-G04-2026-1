@@ -14,7 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 const UserController = require('../LinkSQL/Controllers/userController'); 
 const EventController = require('../LinkSQL/Controllers/eventController');
 const GastosController = require('../LinkSQL/Controllers/gastosController');
-const FriendController = require('../LinkSQL/Controllers/friendController'); // Verifique este caminho
+const FriendController = require('../LinkSQL/Controllers/friendController'); 
+
 
 function protegerRota(req, res, next) {
     if (!req.session.usuarioLogado) {
@@ -52,7 +53,7 @@ app.get('/users/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/index.html');
 });
-
+app.post("/events/responder", protegerRota, EventController.responderConvite);
 // --- ROTAS SOCIAIS (AMIGOS) ---
 app.get('/friends/search', protegerRota, FriendController.buscarUsuarios);
 app.post('/friends/request', protegerRota, FriendController.enviarSolicitacao);
