@@ -1,6 +1,6 @@
-
 const Event = require('../Models/Event');
 const Gasto = require('../Models/Gasto');
+const User = require('../Models/User');
 
 module.exports = {
     criar: async (req, res) => {
@@ -95,34 +95,61 @@ module.exports = {
     buscarEvento: async (req, res) => {
         try {
             const id = req.params.id;
-            // O populate('confirmados') traz o Nick e Nome de quem aceitou
             const evento = await Event.findById(id)
                 .populate('fk_idUsuario', 'Nick')
+                .populate('convidados', 'Nick Nome')
                 .populate('confirmados', 'Nick Nome');
 
             if (!evento) return res.status(404).json({ ok: false });
-
-            // Busca o gasto original criado junto com o evento
             const gasto = await Gasto.findOne({ fk_idEvento: id });
-            
-            res.json({ 
-                ok: true, 
-                evento, 
-                valorTotal: gasto ? gasto.valorGasto : 0 
-            });
-        } catch (err) {
-            res.status(500).json({ ok: false });
-        }
+            res.json({ ok: true, evento, valorTotal: gasto ? gasto.valorGasto : 0 });
+        } catch (err) { res.status(500).json({ ok: false }); }
     },
+
+    salvarDivisaoManual: async (req, res) => {
+        try {
+            const { idEvento, distribuicao } = req.body;
+            await Event.findByIdAndUpdate(idEvento, { divisaoManual: distribuicao });
+            res.json({ ok: true });
+        } catch (err) { res.status(500).json({ ok: false }); }
+    },
+
+    gerenciarParticipante: async (req, res) => {
+        try {
+            const { idEvento, idUsuario, acao } = req.body; // acao: 'convidar' ou 'remover'
+            
+            if (acao === 'convidar') {
+                await Event.findByIdAndUpdate(idEvento, { $addToSet: { convidados: idUsuario } });
+            } else {
+                await Event.findByIdAndUpdate(idEvento, { 
+                    $pull: { convidados: idUsuario, confirmados: idUsuario, divisaoManual: { usuarioId: idUsuario } } 
+                });
+            }
+            res.json({ ok: true });
+        } catch (err) { res.status(500).json({ ok: false }); }
+    },
+
+    responderConvite: async (req, res) => {
+        try {
+            const meuId = req.session.usuarioLogado._id;
+            const { idEvento, acao } = req.body;
+            if (acao === 'aceitar') {
+                await Event.findByIdAndUpdate(idEvento, {
+                    $pull: { convidados: meuId },
+                    $addToSet: { confirmados: meuId }
+                });
+            } else {
+                await Event.findByIdAndUpdate(idEvento, { $pull: { convidados: meuId, confirmados: meuId } });
+            }
+            res.json({ ok: true });
+        } catch (err) { res.status(500).json({ ok: false }); }
+    },
+    
     excluir: async (req, res) => {
         try {
-            const id = req.body.id;
-            await Event.findByIdAndDelete(id);
-            // Também removemos o gasto associado para não sujar o financeiro
-            await Gasto.deleteMany({ fk_idEvento: id });
+            await Event.findByIdAndDelete(req.body.id);
+            await Gasto.deleteMany({ fk_idEvento: req.body.id });
             res.json({ ok: true });
-        } catch (err) {
-            res.status(500).json({ ok: false });
-        }
+        } catch (err) { res.status(500).json({ ok: false }); }
     }
 };

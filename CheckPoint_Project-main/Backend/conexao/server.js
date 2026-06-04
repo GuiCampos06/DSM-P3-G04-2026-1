@@ -53,6 +53,8 @@ app.get('/users/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/index.html');
 });
+app.post("/events/participante", protegerRota, EventController.gerenciarParticipante);
+app.post("/events/divisao-manual", protegerRota, EventController.salvarDivisaoManual);
 app.post("/events/responder", protegerRota, EventController.responderConvite);
 // --- ROTAS SOCIAIS (AMIGOS) ---
 app.get('/friends/search', protegerRota, FriendController.buscarUsuarios);
