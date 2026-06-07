@@ -1,36 +1,41 @@
 /* ============================================
-   CHECKPOINT — media.css  (versão responsiva completa)
-   Cobre: style.css base + recuperar.css
+   CHECKPOINT — media-cadastro.css
+   Responsividade completa da página de cadastro
    Breakpoints:
-     ≥ 1024px  → Desktop  (layout side-by-side)
-     768–1023px → Tablet   (banner compacto)
-     ≤ 767px   → Mobile   (banner oculto, painel full)
-     ≤ 400px   → Mobile S (ajustes finos)
+     ≥ 1024px   Desktop
+     768–1023px Tablet
+     ≤ 767px    Mobile
+     ≤ 400px    Mobile S
+     landscape  Altura baixa
    ============================================ */
 
 
 /* ══════════════════════════════════════════
-   1. DESKTOP  ≥ 1024px
+   1. DESKTOP ≥ 1024px
    ══════════════════════════════════════════ */
 @media (min-width: 1024px) {
 
     .card {
-        width: 900px;
+        display: flex;
+        width: 960px;
+        min-height: 620px;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid #2a2a2e;
     }
 
-    .banner {
-        display: flex;
-    }
+    .banner { display: flex; }
 
     .login-panel {
+        width: 420px;
+        flex-shrink: 0;
         border-radius: 0 20px 20px 0;
     }
 }
 
 
 /* ══════════════════════════════════════════
-   2. TABLET  768px – 1023px
-   Banner fica menor, painel se ajusta
+   2. TABLET 768px – 1023px
    ══════════════════════════════════════════ */
 @media (min-width: 768px) and (max-width: 1023px) {
 
@@ -42,93 +47,64 @@
 
     .card {
         flex-direction: row;
-        min-height: 520px;
         border-radius: 16px;
+        min-height: 560px;
+        overflow: hidden;
+        border: 1px solid #2a2a2e;
     }
 
-    /* Banner ocupa menos espaço */
     .banner {
-        flex: 0 0 240px;
+        flex: 0 0 220px;
         padding: 36px 28px;
+        display: flex;
     }
 
-    .banner-title h2 {
-        font-size: 38px;
-    }
+    .banner-title h2 { font-size: 36px; }
+    .banner-desc { font-size: 13px; max-width: 190px; }
+    .dots-row { bottom: 28px; left: 28px; }
 
-    .banner-desc {
-        font-size: 13px;
-        max-width: 200px;
-    }
-
-    .dots-row {
-        bottom: 28px;
-        left: 28px;
-    }
-
-    /* Painel cresce para ocupar o resto */
     .login-panel {
         flex: 1;
         width: auto;
-        padding: 40px 36px;
+        padding: 36px 32px;
         border-radius: 0 16px 16px 0;
+        overflow-y: auto;
     }
 
-    .login-panel h1 {
-        font-size: 24px;
-    }
-
-    /* Recuperar — sucesso centralizado */
-    #step-success {
-        padding: 0 8px;
-    }
+    .login-panel h1 { font-size: 24px; }
 }
 
 
 /* ══════════════════════════════════════════
-   3. MOBILE  ≤ 767px
-   Banner oculto, painel ocupa tela inteira
+   3. MOBILE ≤ 767px
    ══════════════════════════════════════════ */
 @media (max-width: 767px) {
 
     body {
         padding: 0;
         align-items: flex-start;
-        background: #111114;   /* evita flash escuro fora do card */
+        background: #111114;
     }
 
     .card {
         flex-direction: column;
         border-radius: 0;
         border: none;
-        min-height: 100dvh;    /* usa dvh para mobile browsers com barra de URL */
+        min-height: 100dvh;
     }
 
-    /* Oculta o banner lateral */
-    .banner {
-        display: none;
-    }
+    .banner { display: none; }
 
-    /* Painel ocupa 100% */
     .login-panel {
         width: 100%;
         border-radius: 0;
-        padding: 52px 28px 40px;
+        padding: 64px 28px 100px;
         min-height: 100dvh;
         justify-content: flex-start;
-        padding-top: 64px;
+        box-sizing: border-box;
     }
 
-    .login-panel h1 {
-        font-size: 28px;
-        margin-bottom: 6px;
-    }
-
-    .login-panel .sub {
-        margin-bottom: 28px;
-    }
-
-    /* Topo mobile: logo discreta */
+    /* Logo discreta no topo */
     .login-panel::before {
         content: 'CHECKPOINT';
         display: block;
@@ -137,10 +113,12 @@
         font-weight: 700;
         letter-spacing: 5px;
         color: #c084fc;
-        margin-bottom: 32px;
+        margin-bottom: 28px;
     }
 
-    /* Campos um pouco maiores para toque */
+    .login-panel h1 { font-size: 28px; }
+
+    /* Campos maiores para toque */
     .field input {
         height: 48px;
         font-size: 15px;
@@ -151,39 +129,24 @@
         height: 50px;
         font-size: 14px;
         border-radius: 12px;
-        margin-bottom: 20px;
     }
 
-    /* Info box */
-    .info-box {
-        font-size: 13px;
-        padding: 14px 14px;
-        margin-bottom: 20px;
+    /* Sucesso */
+    #step-success { padding-top: 20px; }
+    .success-icon-wrap { width: 72px; height: 72px; }
+    .success-icon-wrap svg { width: 34px; height: 34px; }
+    .success-nick-box { word-break: break-all; }
+
+    /* Modal termos ocupa mais espaço */
+    .terms-modal {
+        max-height: 90vh;
+        border-radius: 20px 20px 0 0;
+        margin-top: auto;
     }
 
-    /* Sucesso mobile */
-    #step-success {
-        padding-top: 20px;
-    }
+    .terms-overlay { align-items: flex-end; padding: 0; }
 
-    .success-icon-wrap {
-        width: 72px;
-        height: 72px;
-        margin-bottom: 16px;
-    }
-
-    .success-icon-wrap svg {
-        width: 34px;
-        height: 34px;
-    }
-
-    .success-email-box {
-        font-size: 13px;
-        padding: 10px 14px;
-        word-break: break-all;
-    }
-
-    /* Bubble menor e mais próximo da borda */
+    /* Bubble */
     #bubble {
         bottom: 20px;
         right: 20px;
@@ -191,93 +154,62 @@
         height: 44px;
     }
 
-    #bubble svg {
-        width: 18px;
-        height: 18px;
-    }
-
-    /* Social buttons: empilha se não couberem */
-    .social-row {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .social-btn {
-        flex: 1 1 calc(50% - 4px);
-        min-width: 0;
-    }
+    #bubble svg { width: 18px; height: 18px; }
 }
 
 
 /* ══════════════════════════════════════════
-   4. MOBILE PEQUENO  ≤ 400px
+   4. MOBILE PEQUENO ≤ 400px
    ══════════════════════════════════════════ */
 @media (max-width: 400px) {
 
     .login-panel {
-        padding: 52px 20px 36px;
+        padding: 56px 18px 90px;
     }
 
-    .login-panel h1 {
-        font-size: 24px;
-    }
+    .login-panel h1 { font-size: 24px; }
+
+    .field { margin-bottom: 14px; }
 
     .field input {
         height: 46px;
         font-size: 14px;
     }
 
-    .btn-login {
-        height: 48px;
-    }
+    .btn-login { height: 48px; }
 
-    .info-box {
-        font-size: 12px;
-    }
-
-    .success-email-box {
-        font-size: 12px;
+    .success-nick-box {
+        font-size: 12.5px;
         flex-direction: column;
         gap: 6px;
         text-align: center;
     }
 
-    .social-row {
-        gap: 6px;
-    }
-
-    .social-btn {
-        flex: 1 1 100%;   /* empilha verticalmente em telas muito pequenas */
-    }
+    .terms-header { padding: 16px 18px 14px; }
+    .terms-body   { padding: 16px 18px; }
+    .terms-footer { padding: 14px 18px 18px; }
 }
 
 
 /* ══════════════════════════════════════════
-   5. LANDSCAPE MOBILE  (altura baixa)
-   Garante scroll suave sem cortes
+   5. LANDSCAPE MOBILE (altura baixa)
    ══════════════════════════════════════════ */
 @media (max-width: 767px) and (max-height: 600px) {
 
     .login-panel {
         min-height: unset;
         padding-top: 40px;
-        padding-bottom: 80px;  /* espaço para o bubble */
+        padding-bottom: 80px;
     }
 
-    .login-panel h1 {
-        font-size: 22px;
-    }
+    .login-panel h1 { font-size: 22px; }
+    .login-panel .sub { margin-bottom: 14px; }
 
-    .login-panel .sub {
-        margin-bottom: 16px;
-    }
+    .field { margin-bottom: 12px; }
 
-    .field {
-        margin-bottom: 12px;
-    }
+    .field input { height: 42px; }
 
-    .info-box {
-        margin-bottom: 14px;
-        padding: 10px 12px;
-    }
+    .btn-login { height: 44px; }
+
+    .strength-wrap { margin-top: 5px; }
 }
